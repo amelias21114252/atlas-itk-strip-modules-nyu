@@ -1,0 +1,405 @@
+import subprocess
+from pathlib import Path
+
+output_dir = Path("outputs")
+output_dir.mkdir(exist_ok=True)
+
+serial_numbers = [
+    "20USBHX2003825",
+    "20USBHX2003823",
+    "20USBHX2003826",
+    "20USBHX2003810",
+    "20USBHX2003811",
+    "20USBHX2003812",
+    "20USBHX2003813",
+    "20USBHX2003814",
+    "20USBHX2003815",
+    "20USBHX2003817",
+    "20USBHX2003818",
+    "20USBHX2003819",
+    "20USBHX2003901",
+    "20USBHX2003902",
+    "20USBHX2003903",
+    "20USBHX2003898",
+    "20USBHX2003899",
+    "20USBHX2003900",
+    "20USBHX2003827",
+    "20USBHX2003820",
+    "20USBHX2003887",
+    "20USBHX2003888",
+    "20USBHX2003889",
+    "20USBHX2003890",
+    "20USBHX2003956",
+    "20USBHX2003955",
+    "20USBHX2003954",
+    "20USBHX2003953",
+    "20USBHX2003958",
+    "20USBHX2003957",
+    "20USBHX2003891",
+    "20USBHX2003975",
+    "20USBHX2003974",
+    "20USBHX2003973",
+    "20USBHX2003972",
+    "20USBHX2003971",
+    "20USBHX2003910",
+    "20USBHX2003911",
+    "20USBHX2003969",
+    "20USBHX2003970",
+    "20USBHX2003966",
+    "20USBHX2003968",
+    "20USBHX2003965",
+    "20USBHX2003960",
+    "20USBHX2003961",
+    "20USBHX2003962",
+    "20USBHX2003963",
+    "20USBHX2003964",
+    "20USBHX2003952",
+    "20USBHX2003951",
+    "20USBHX2003949",
+    "20USBHX2003948",
+    "20USBHX2003947",
+    "20USBHX2003929",
+    "20USBHX2003892",
+    "20USBHX2003897",
+    "20USBHX2003930",
+    "20USBHX2003931",
+    "20USBHX2003932",
+    "20USBHX2003933",
+    "20USBHX2003882",
+    "20USBHX2003883",
+    "20USBHX2003884",
+    "20USBHX2003885",
+    "20USBHX2003886",
+    "20USBHX2003828",
+    "20USBHX2003893",
+    "20USBHX2003894",
+    "20USBHX2003895",
+    "20USBHX2003896",
+    "20USBHX2003998",
+    "20USBHX2004003",
+    "20USBHX2004048",
+    "20USBHX2004055",
+    "20USBHX2004054",
+    "20USBHX2003816",
+    "20USBHX2004002",
+    "20USBHX2004001",
+    "20USBHX2004264",
+    "20USBHX2004265",
+    "20USBHX2004266",
+    "20USBHX2004267",
+    "20USBHX2004268",
+    "20USBHX2004269",
+    "20USBHX2004050",
+    "20USBHX2004051",
+    "20USBHX2004044",
+    "20USBHX2004045",
+    "20USBHX2004046",
+    "20USBHX2004047",
+    "20USBHX2004043",
+    "20USBHX2004042",
+    "20USBHX2004041",
+    "20USBHX2004040",
+    "20USBHX2004039",
+    "20USBHX2004038",
+    "20USBHX2004276",
+    "20USBHX2004274",
+    "20USBHX2004273",
+    "20USBHX2004275",
+    "20USBHX2004271",
+    "20USBHX2004272",
+    "20USBHX2004052",
+    "20USBHX2004277",
+    "20USBHX2004278",
+    "20USBHX2004053",
+    "20USBHX2004000",
+    "20USBHX2004049",
+    "20USBHX2004279",
+    "20USBHX2004280",
+    "20USBHX2004281",
+    "20USBHX2004282",
+    "20USBHX2004328",
+    "20USBHX2004327",
+    "20USBHX2004429",
+    "20USBHX2004428",
+    "20USBHX2004427",
+    "20USBHX2004425",
+    "20USBHX2004426",
+    "20USBHX2004424",
+    "20USBHX2004422",
+    "20USBHX2004423",
+    "20USBHX2004418",
+    "20USBHX2004419",
+    "20USBHX2004420",
+    "20USBHX2004421",
+    "20USBHX2004603",
+    "20USBHX2004604",
+    "20USBHX2004605",
+    "20USBHX2004600",
+    "20USBHX2004601",
+    "20USBHX2004602",
+    "20USBHX2004606",
+    "20USBHX2004607",
+    "20USBHX2004608",
+    "20USBHX2004609",
+    "20USBHX2004610",
+    "20USBHX2004611",
+    "20USBHX2004612",
+    "20USBHX2004613",
+    "20USBHX2004614",
+    "20USBHX2004615",
+    "20USBHX2004616",
+    "20USBHX2004617",
+    "20USBHX2004412",
+    "20USBHX2004413",
+    "20USBHX2004414",
+    "20USBHX2004415",
+    "20USBHX2004416",
+    "20USBHX2004417",
+    "20USBHX2004618",
+    "20USBHX2004619",
+    "20USBHX2004620",
+    "20USBHX2004621",
+    "20USBHX2004622",
+    "20USBHX2004623",
+    "20USBHX2004624",
+    "20USBHX2004625",
+    "20USBHX2004626",
+    "20USBHX2004627",
+    "20USBHX2004628",
+    "20USBHX2004629",
+    "20USBHX2004323",
+    "20USBHX2004325",
+    "20USBHX2004283",
+    "20USBHX2004324",
+    "20USBHX2004326",
+    "20USBHX2004635",
+    "20USBHX2004801",
+    "20USBHX2004802",
+    "20USBHX2004803",
+    "20USBHX2004804",
+    "20USBHX2004805",
+    "20USBHX2004800",
+    "20USBHX2004632",
+    "20USBHX2004634",
+    "20USBHX2004633",
+    "20USBHX2004631",
+    "20USBHX2004794",
+    "20USBHX2004630",
+    "20USBHX2004795",
+    "20USBHX2004798",
+    "20USBHX2004976",
+    "20USBHX2004977",
+    "20USBHX2004978",
+    "20USBHX2004980",
+    "20USBHX2005333",
+    "20USBHX2004979",
+    "20USBHX2004975",
+    "20USBHX2004793",
+    "20USBHX2004792",
+    "20USBHX2004920",
+    "20USBHX2004791",
+    "20USBHX2004790",
+    "20USBHX2004789",
+    "20USBHX2004788",
+    "20USBHX2005310",
+    "20USBHX2004921",
+    "20USBHX2004922",
+    "20USBHX2004923",
+    "20USBHX2004924",
+    "20USBHX2004925",
+    "20USBHX2004970",
+    "20USBHX2004971",
+    "20USBHX2004972",
+    "20USBHX2004973",
+    "20USBHX2004799",
+    "20USBHX2005268",
+    "20USBHX2004969",
+    "20USBHX2005269",
+    "20USBHX2005270",
+    "20USBHX2005271",
+    "20USBHX2005272",
+    "20USBHX2005103",
+    "20USBHX2005277",
+    "20USBHX2005273",
+    "20USBHX2005274",
+    "20USBHX2005275",
+    "20USBHX2005278",
+    "20USBHX2005276",
+    "20USBHX2005311",
+    "20USBHX2005330",
+    "20USBHX2005332",
+    "20USBHX2005331",
+    "20USBHX2005387",
+    "20USBHX2005388",
+    "20USBHX2005389",
+    "20USBHX2005390",
+    "20USBHX2005391",
+    "20USBHX2005392",
+    "20USBHX2005379",
+    "20USBHX2005380",
+    "20USBHX2005334",
+    "20USBHX2005382",
+    "20USBHX2005383",
+    "20USBHX2005325",
+    "20USBHX2005326",
+    "20USBHX2005327",
+    "20USBHX2005328",
+    "20USBHX2005329",
+    "20USBHX2005324",
+    "20USBHX2005378",
+    "20USBHX2005366",
+    "20USBHX2005375",
+    "20USBHX2005367",
+    "20USBHX2005373",
+    "20USBHX2005372",
+    "20USBHX2005588",
+    "20USBHX2005586",
+    "20USBHX2005932",
+    "20USBHX2005578",
+    "20USBHX2005934",
+    "20USBHX2005587",
+    "20USBHX2005582",
+    "20USBHX2005303",
+    "20USBHX2005584",
+    "20USBHX2005931",
+    "20USBHX2005371",
+    "20USBHX2005570",
+    "20USBHX2005579",
+    "20USBHX2005585",
+    "20USBHX2005576",
+    "20USBHX2005301",
+    "20USBHX2005577",
+    "20USBHX2005935",
+    "20USBHX2005583",
+    "20USBHX2005370",
+    "20USBHX2005710",
+    "20USBHX2005863",
+    "20USBHX2005864",
+    "20USBHX2005302",
+    "20USBHX2005933",
+    "20USBHX2005707",
+    "20USBHX2005305",
+    "20USBHX2005572",
+    "20USBHX2005300",
+    "20USBHX2005568",
+    "20USBHX2005384",
+    "20USBHX2005571",
+    "20USBHX2005304",
+    "20USBHX2005708",
+    "20USBHX2005709",
+    "20USBHX2005393",
+    "20USBHX2005862",
+    "20USBHX2005575",
+    "20USBHX2005574",
+    "20USBHX2005386",
+    "20USBHX2005369",
+    "20USBHX2005581",
+    "20USBHX2005936",
+    "20USBHX2005580",
+    "20USBHX2005569",
+    "20USBHX2005590",
+    "20USBHX2005385",
+    "20USBHX2005573",
+    "20USBHX2005706",
+    "20USBHX2005376",
+    "20USBHX2005309",
+    "20USBHX2005374",
+    "20USBHX2005306",
+    "20USBHX2005307",
+    "20USBHX2005308",
+    "20USBHX2005368",
+    "20USBHX2005335",
+    "20USBHX2005377",
+]
+
+passed = []
+
+category_e_ii_failed = []
+
+for i, serial in enumerate(serial_numbers, start=1):
+
+    print("=" * 80)
+
+    print(f"[{i}/{len(serial_numbers)}] Running for {serial}")
+
+    try:
+
+        result = subprocess.run(
+
+            [
+                "python",
+                "get_test_run2.py",
+                "--serial_number", serial,
+                "--test_name", "Response Curve TC",
+            ],
+
+            check=True,
+            capture_output=True,
+            text=True,
+
+        )
+
+        print(result.stdout)
+
+        if result.stderr:
+            print(result.stderr)
+
+        passed.append(serial)
+
+        print(f"✅ PASSED: {serial}")
+
+    except subprocess.CalledProcessError as e:
+
+        print(e.stdout)
+
+        print(e.stderr)
+
+        category_e_ii_failed.append(serial)
+
+        print(
+            f"❌ CATEGORY E(ii) FAILURE: {serial} — input noise data could not be found or processed"
+        )
+
+print("\n" + "=" * 80)
+
+print("FINAL SUMMARY")
+
+print("=" * 80)
+
+print(f"\n✅ PASSED ({len(passed)}):")
+
+for serial in passed:
+
+    print(f"  ✅ {serial}")
+
+print(
+    f"\n❌ CATEGORY E(ii) FAILURE — input noise data could not be found or processed ({len(category_e_ii_failed)}):"
+)
+
+for serial in category_e_ii_failed:
+
+    print(f"  ❌ {serial}")
+
+summary_path = output_dir / "category_e_ii_summary_lbnl.txt"
+
+with open(summary_path, "w") as f:
+
+    f.write("FINAL SUMMARY\n")
+
+    f.write("=" * 80 + "\n\n")
+
+    f.write(f"PASSED ({len(passed)}):\n")
+
+    for serial in passed:
+
+        f.write(f"{serial}\n")
+
+    f.write(
+        f"\nCATEGORY E(ii) FAILURE — input noise data could not be found or processed ({len(category_e_ii_failed)}):\n"
+    )
+
+    for serial in category_e_ii_failed:
+
+        f.write(f"{serial}\n")
+
+print(f"\nSaved summary to: {summary_path}")
