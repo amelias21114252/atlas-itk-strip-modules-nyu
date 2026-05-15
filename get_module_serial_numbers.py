@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+#python get_module_serial_numbers.py
+
 '''
 Script to retrieve serial numbers of production ITk modules from different assembly institutes 
 
