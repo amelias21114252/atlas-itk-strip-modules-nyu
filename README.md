@@ -1000,7 +1000,7 @@ https://ameliame.web.cern.ch/
 Run the page-generation script:
 
 ```bash
-python generate_channel_page_final.py
+python generate_channel_page_scrolldetailedhis.py
 ```
 
 This creates:
@@ -1036,10 +1036,24 @@ Each time you edit `index.html`, re-upload the updated version to CERNBox.
 
 ## 32.3 Upload plot folders to CERNBox
 
-Upload each DB Serial Number folder and X-Hybrid Mounted Number folder to:
+Upload each DB Serial Number folder and X-Hybrid Mounted Number folder to the corresponding site folder.
+
+For BNL modules, upload to:
 
 ```text
-https://cernbox.cern.ch/files/spaces/eos/user/a/ameliame/www/atlas-plots/
+https://cernbox.cern.ch/files/spaces/eos/user/a/ameliame/www/BNL/
+```
+
+For LBNL modules, upload to:
+
+```text
+https://cernbox.cern.ch/files/spaces/eos/user/a/ameliame/www/LBNL/
+```
+
+For UCSC modules, upload to:
+
+```text
+https://cernbox.cern.ch/files/spaces/eos/user/a/ameliame/www/UCSC/
 ```
 
 This is where the webpage reads the plot content from.
