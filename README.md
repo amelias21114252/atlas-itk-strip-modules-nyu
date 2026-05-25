@@ -977,7 +977,87 @@ If the folders are not uploaded, the webpage may load, but the plot and JSON lin
 
 ---
 
-# 32. Category definitions
+---
+
+# 32. Webpage instructions
+
+To create the webpage, follow the CERN Web EOS site creation tutorials:
+
+```text
+https://webeos.docs.cern.ch/create_site/
+```
+
+The webpage is linked here:
+
+```text
+https://ameliame.web.cern.ch/
+```
+
+---
+
+## 32.1 Generate the HTML page
+
+Run the page-generation script:
+
+```bash
+python generate_channel_page_final.py
+```
+
+This creates:
+
+```text
+index.html
+```
+
+Then upload `index.html` to your CERNBox.
+
+All plot folders should also be uploaded to CERNBox.
+
+Example plot folders include:
+
+```text
+SN20USBML1235874
+SN20USBHX2002657
+```
+
+---
+
+## 32.2 Upload `index.html` to CERNBox
+
+Upload `index.html` to the following path:
+
+```text
+https://cernbox.cern.ch/files/spaces/eos/user/a/ameliame/www
+```
+
+Each time you edit `index.html`, re-upload the updated version to CERNBox.
+
+---
+
+## 32.3 Upload plot folders to CERNBox
+
+Upload each DB Serial Number folder and X-Hybrid Mounted Number folder to:
+
+```text
+https://cernbox.cern.ch/files/spaces/eos/user/a/ameliame/www/atlas-plots/
+```
+
+This is where the webpage reads the plot content from.
+
+---
+
+# 33. Notes
+
+A few useful naming conventions used in this workflow:
+
+- **X-Hybrid Mounted Number**: used for input noise and histogram workflows
+- **DB Serial Number**: used for IV workflows
+- **Response Curve TC**: used for input noise related database extraction
+- **Module AMAC IV TC**: used for thermal cycling IV data
+- **Module IV with PS V1**: used for pre-gluing IV data
+
+
+# 34. Category definitions
 
 Category A means the IV current is above the 300 nA threshold.
 
@@ -1009,7 +1089,7 @@ This category uses HX serial numbers.
 
 ---
 
-# 33. Full command list
+# 35. Full command list
 
 Run the serial-number generator scripts:
 
@@ -1104,7 +1184,7 @@ UCSC/
 
 ---
 
-# 34. Troubleshooting notes
+# 36. Troubleshooting notes
 
 If a module appears in Category E(i), the IV data may be missing, unavailable, inaccessible, or not processed correctly.
 
